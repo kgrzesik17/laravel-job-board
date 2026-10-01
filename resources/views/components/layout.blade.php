@@ -9,6 +9,6 @@
     </head>
 
     <body>
-        <div class="text-4xl">This should be a big test</div>
+        {{ $slot }}
     </body>
 </html>
