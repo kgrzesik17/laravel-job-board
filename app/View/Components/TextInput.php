@@ -12,6 +12,8 @@ class TextInput extends Component
      * Create a new component instance.
      */
     public function __construct(
+        // you can override these values in the html
+
         public ?string $value = null,
         public ?string $name = null,
         public ?string $placeholder = null
