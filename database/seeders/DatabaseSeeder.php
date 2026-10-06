@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'Kacper Grzesik',
+            'email' => 'kacper@grzesik.com',
+        ]);
+
         \App\Models\User::factory(300)->create();
 
         $users = \App\Models\User::all()->shuffle();  // randomize all the users
