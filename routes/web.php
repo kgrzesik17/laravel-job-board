@@ -26,6 +26,6 @@ Route::delete('auth', [AuthController::class, 'destroy'])
 Route::middleware('auth')->group(function() {
     // all of there will have the middleware applied
 
-Route::resource('job.application', JobApplicationController::class)
-    ->only(['create', 'store']);
+    Route::resource('job.application', JobApplicationController::class)
+        ->only(['create', 'store']);
 });
