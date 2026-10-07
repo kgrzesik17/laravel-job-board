@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticable;
+use App\Models\Employer;
+use App\Models\JobApplication;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,6 +26,14 @@ class Job extends Model
 
     public function jobApplications(): HasMany {
         return $this->hasMany(JobApplication::class);
+    }
+
+    public function hasUserApplied(Authenticable|User|int $user): bool {
+        return $this->where('id', $this->id)
+            ->whereHas(
+                'jobApplications',
+                fn($query) => $query->where('user_id', '=', $user->id ?? $user)  // id or object
+                )->exists();  // return true value if exists
     }
 
     public function scopeFilter(Builder | QueryBuilder $query, array $filters): Builder|QueryBuilder {

@@ -66,6 +66,6 @@ class JobPolicy
 
     // we could also create a JobApplication policy, but it involves around a Job
     public function apply(User $user, Job $job): bool {
-        return false;
+        return !$job->hasUserApplied($user);
     }
 }
