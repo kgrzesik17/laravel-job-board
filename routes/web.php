@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,10 @@ Route::delete('auth', 'AuthController@destroy')  // alternative syntax
 
 Route::delete('auth', [AuthController::class, 'destroy'])
     ->name('auth.destroy');
+
+Route::middleware('auth')->group(function() {
+    // all of there will have the middleware applied
+
+Route::resource('job.application', JobApplicationController::class)
+    ->only(['create', 'store']);
+});
