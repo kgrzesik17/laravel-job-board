@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\MyJobApplicationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn() => to_route('jobs.index'));  // to_route() = redirect()->route()
@@ -28,4 +29,7 @@ Route::middleware('auth')->group(function() {
 
     Route::resource('job.application', JobApplicationController::class)
         ->only(['create', 'store']);
+
+    Route::resource('my-job-applications', MyJobApplicationController::class)
+        ->only(['index', 'destroy']);
 });

@@ -7,7 +7,6 @@
             {!! nl2br(e($job->description)) !!}
         </p>
 
-        <!-- @can is connected to the policy -->
         @can('apply', $job)
             <x-link-button :href="route('job.application.create', $job)">
                 Apply
