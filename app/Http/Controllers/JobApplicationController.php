@@ -22,11 +22,21 @@ class JobApplicationController extends Controller
      */
     public function store(Job $job, Request $request)
     {
+        Gate::authorize('apply', $job);
+
+        $validatedData = $request->validate([
+            'expected_salary' => 'required|min:1|max:1000000',
+            'cv' => 'required|file|mimes:pdf|max:2048'  // file validation
+        ]);
+
+        $file = $request->file('cv');  // access the temporary file
+        $path = $file->store('cvs', 'local');  // store the file permanently folder, storage
+
         $job->jobApplications()->create([
             'user_id' => $request->user()->id, // if logged in, will retur the user. otherwise null
-            ...$request->validate([
-                'expected_salary' => 'required|min:1|max:1000000'
-            ])
+            'expected_salary' => $validatedData['expected_salary'],
+            'cv_path' => $path
+
         ]);
 
         return redirect()->route('jobs.show', $job)
