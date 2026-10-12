@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 @empty
-                    <div>No applications yet</div>
+                    <div class="mb-4">No applications yet</div>
                 @endforelse
 
                 <div class="flex gap-2">
@@ -39,7 +39,7 @@
                         @csrf
                         @method('DELETE')
 
-                        <x-button>Delete</x-button>
+                        <x-button class="{{$job->deleted_at ? 'bg-slate-200! hover:cursor-not-allowed!' : ''}}" type="{{ $job->deleted_at ? 'button' : 'submit' }}">Delete</x-button>
                     </form>
                 </div>
             </div>
