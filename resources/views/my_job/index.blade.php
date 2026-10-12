@@ -34,6 +34,13 @@
 
                 <div class="flex gap-2">
                     <x-link-button href="{{ route('my-jobs.edit', $job) }}">Edit</x-link-button>
+
+                    <form action="{{ route('my-jobs.destroy', $job) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <x-button>Delete</x-button>
+                    </form>
                 </div>
             </div>
         </x-job-card>
